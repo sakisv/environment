@@ -1,0 +1,123 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+export TERM=xterm-256color
+# User specific aliases and functions
+
+export EDITOR=vim
+
+#
+# History stuff
+#
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# Note: for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+
+
+#
+# Color prompt stuff
+#
+
+#------------------------------------------////
+# tput colors:
+#------------------------------------------////
+
+# Action                    Parameters
+# Set background color      tput setab [color]
+# Set foreground color      tput setaf [color]
+# Set bold mode             tput bold
+# Set half-bright mode      tput dim
+# Set underline mode        tput smul
+# Exit underline mode       tput rmul
+# Reverse mode              tput rev
+# Set standout mode         tput smso
+# Exit standout mode        tput rmso
+# Reset all attributes      tput sgr0
+
+# Color    Code
+# Black     0
+# Red       1
+# Green     2
+# Yellow    3
+# Blue      4
+# Magenta   5
+# Cyan      6
+# White     7
+
+
+
+
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+    else
+    color_prompt=
+    fi
+fi
+
+export COLOR_PROMPT=$color_prompt
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+
+#
+# Configure git=prompt
+#
+
+if [ -f ~/.gitcompletion.sh ]; then
+    source ~/.git_completion.sh
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    git_ps1_exists=1
+fi
+
+if [ "$COLOR_PROMPT" = yes ]; then
+    prompt='\[$(tput bold)\]'
+    prompt+='\[$(tput setaf 2)\]\u'
+    prompt+='\[$(tput setaf 7)\]@'
+    prompt+='\[$(tput setaf 1)\]\h'
+    prompt+='\[$(tput setaf 7)\]:'
+    prompt+='\[$(tput setaf 4)\]\w'
+    if [ "$git_ps1_exists" = "1" ]; then
+        prompt+='\[$(tput setaf 3)\]$(__git_ps1)'
+    fi
+    prompt+='\[$(tput sgr0)\]'
+    prompt+='$ '
+    export PS1=$prompt
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+
+
+#
+# load bash_aliases
+#
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi

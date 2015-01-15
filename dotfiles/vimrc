@@ -1,0 +1,151 @@
+set t_Co=256
+set pastetoggle=<F2>
+set encoding=utf-8
+set mouse=a
+
+" apply vimrc changes upon save
+autocmd! bufwritepost .vimrc source ~/.vimrc
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
+" show evil trailing whitespace
+set list listchars=trail:~
+" remove it on :w
+autocmd BufWritePre *.js :%s/\s\+$//e
+autocmd BufWritePre *.html :%s/\s\+$//e
+autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre *.php :%s/\s\+$//e
+
+" This beauty remembers where you were the last time you edited the file, and returns to the same position.
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
+" Highlight the matching bracket
+set showmatch
+
+" Show the line numbers
+set number
+
+" Syntax highlight
+syntax on
+" More syntax highlighting.
+let python_highlight_all = 1
+
+" Highlight current line
+set cursorline
+
+" Better command-line completion
+set wildmenu
+
+" Show partial commands in the last line of the screen
+set showcmd
+
+" Backspace over insert, line breaks and autoindent
+set backspace=indent,eol,start
+
+"
+" Search stuff
+"
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+ " Stupid shift key fixes
+if has("user_commands")
+    " command! -bang -nargs=* -complete=file E e<bang> <args>
+    command! -bang -nargs=* -complete=file W w<bang> <args>
+    " command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+    " command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+    " command! -bang Wa wa<bang>
+    " command! -bang WA wa<bang>
+    " command! -bang Q q<bang>
+    " command! -bang QA qa<bang>
+    " command! -bang Qa qa<bang>
+endif
+
+"
+" Indentation stuff
+"
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set autoindent
+filetype plugin indent on
+
+" indent guides stuff
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+set ls=2
+
+" toggle highlighting search results
+nnoremap <F3> :set hlsearch!<CR>
+
+" \l toggles line numbers
+:nmap \l :setlocal number!<CR>
+" \m sets mouse to all
+:nmap \m :set mouse=a<CR>
+" \mm sets mouse to visual
+:nmap \mm :set mouse=v<CR>
+
+" shortcut for opening in new tab
+:nmap :et :tab sp
+
+" insert python breakpoint
+:imap <F12> import ipdb; ipdb.set_trace()
+:nmap <F12> oimport ipdb; ipdb.set_trace()<Esc>
+
+" instead of hitting Esc just press jj while on insert mode
+:inoremap jj <Esc>
+
+" bind ctrl+movement (h,j,k,l) to move between splits
+map <c-h> <c-w>h
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+
+" 
+" stuff related to vundle
+"
+
+set nocompatible
+filetype off
+
+" set the RunTimePath for vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" 
+" List plugins here
+"
+Plugin 'kien/ctrlp.vim'
+Plugin 'bling/vim-airline'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tpope/vim-surround'
+Plugin 'amirh/HTML-AutoCloseTag'
+
+call vundle#end()
+filetype plugin indent on
+
+
+" Set the colorscheme
+colorscheme molokai
+let g:Powerline_colorscheme='mar'
+
+" Toggle NERDTree
+:map <F4> :NERDTreeToggle<CR>
+
+" Deletes contents of the file
+nmap :da<CR> ggVGd
+
+:hi MatchParen cterm=underline ctermbg=none ctermfg=red
+
+" Flake8 config
+let g:syntastic_python_flake8_args='--ignore=E501,E128'
+let g:syntastic_html_checkers=[]
