@@ -14,10 +14,11 @@ curl -Gk https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.
 echo "$prefix Downloading Vundle"
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-echo "$prefix Creating ~/.vimrc and ~/.bashrc soft links"
+echo "$prefix Creating soft links for ~/.bashrc, ~/.vimrc, ~/.bash_aliases"
 path=`pwd`
 ln -s $path/dotfiles/vimrc ~/.vimrc
 ln -s $path/dotfiles/bashrc ~/.bashrc
+ln -s $path/dotfiles/bash_aliases ~/.bash_aliases
 
 echo "$prefix Installing vim plugins"
 vim +PluginInstall +qall
