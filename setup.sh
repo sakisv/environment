@@ -1,24 +1,26 @@
-echo "Removing old stuff"
+prefix="=====>"
+echo "$prefix Removing old stuff"
 rm -rf ~/.vim
 rm ~/.bashrc
 rm ~/.vimrc
 
-echo "Creating ~/.vim/bundle & ~/.vim/colors"
+echo "$prefix Creating ~/.vim/bundle & ~/.vim/colors"
 mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/colors/
 
-echo "Downloading molokai"
+echo "$prefix Downloading molokai"
 curl -Gk https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim -o ~/.vim/colors/molokai.vim
 
-echo "Downloading Vundle"
+echo "$prefix Downloading Vundle"
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-echo "Creating ~/.vimrc and ~/.bashrc soft links"
-ln -s ~/environment/dotfiles/vimrc ~/.vimrc
-ln -s ~/environment/dotfiles/bashrc ~/.bashrc
+echo "$prefix Creating ~/.vimrc and ~/.bashrc soft links"
+path=`pwd`
+ln -s $path/dotfiles/vimrc ~/.vimrc
+ln -s $path/dotfiles/bashrc ~/.bashrc
 
-echo "Installing vim plugins"
+echo "$prefix Installing vim plugins"
 vim +PluginInstall +qall
 
-echo "Reloading shell"
+echo "$prefix Reloading shell"
 source ~/.bashrc
