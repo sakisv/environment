@@ -3,6 +3,7 @@ echo "$prefix Removing old stuff"
 rm -rf ~/.vim
 rm ~/.bashrc
 rm ~/.vimrc
+rm ~/.bash_aliases
 
 echo "$prefix Creating ~/.vim/bundle & ~/.vim/colors"
 mkdir -p ~/.vim/bundle/
