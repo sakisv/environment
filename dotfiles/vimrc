@@ -26,6 +26,9 @@ set showmatch
 " Show the line numbers
 set number
 
+" Disable highlighting spelling mistakes (http://stackoverflow.com/a/10963639/1477072)
+set nospell
+
 " Syntax highlight
 syntax on
 " More syntax highlighting.
