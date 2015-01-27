@@ -25,6 +25,9 @@ shopt -s histappend
 
 # Note: for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 
+# when pressing tab, ignore .hidden files (http://askubuntu.com/a/190773)
+bind 'set match-hidden-files off'
+
 
 #
 # Color prompt stuff
