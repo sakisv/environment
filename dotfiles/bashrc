@@ -86,11 +86,15 @@ unset color_prompt force_color_prompt
 
 
 #
-# Configure git=prompt
+# Load git-prompt && git-completion
 #
 
-if [ -f ~/.gitcompletion.sh ]; then
-    source ~/.git_completion.sh
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+fi
+
+if [ -f ~/.git-prompt.sh ]; then
+    source ~/.git-prompt.sh
     export GIT_PS1_SHOWDIRTYSTATE=1
     git_ps1_exists=1
 fi
