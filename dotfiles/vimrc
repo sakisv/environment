@@ -153,3 +153,8 @@ nmap :da<CR> ggVGd
 " Flake8 config
 let g:syntastic_python_flake8_args='--ignore=E501,E128'
 let g:syntastic_html_checkers=[]
+
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
