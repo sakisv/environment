@@ -1,5 +1,10 @@
 # .bashrc
 
+osname=`uname -s`
+if [ $osname == 'Darwin' ]; then
+    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
