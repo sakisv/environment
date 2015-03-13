@@ -6,6 +6,7 @@ rm ~/.vimrc
 rm ~/.bash_aliases
 rm ~/.git-completion.bash
 rm ~/.git-prompt.sh
+rm ~/.screenrc
 
 echo "$prefix Creating ~/.vim/bundle & ~/.vim/colors"
 mkdir -p ~/.vim/bundle/
@@ -26,6 +27,7 @@ path=`pwd`
 ln -s $path/dotfiles/vimrc ~/.vimrc
 ln -s $path/dotfiles/bashrc ~/.bashrc
 ln -s $path/dotfiles/bash_aliases ~/.bash_aliases
+ln -s $path/dotfiles/screenrc ~/.screenrc
 
 echo "$prefix Installing vim plugins"
 vim +PluginInstall +qall

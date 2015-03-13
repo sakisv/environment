@@ -1,0 +1,8 @@
+# don't show the startup message
+startup_message off
+
+# number of scrollback lines
+defscrollback 5000
+
+# when you quit something like vim, clear it off the screen
+altscreen on
