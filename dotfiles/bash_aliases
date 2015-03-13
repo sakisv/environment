@@ -1,3 +1,7 @@
 alias cl="clear"
-alias ll="ls -FGlh"
-alias la="ls -FGalh"
+
+alias ls="ls --color=auto"
+alias ll="ls -Flh"
+alias la="ls -Falh"
+
+alias grep="grep --color=auto"
