@@ -1,4 +1,12 @@
 prefix="=====>"
+
+if [ `uname -s` == 'Darwin' ]; then
+    if hash brew 2>/dev/null; then
+        echo "$prefix Installing coreutils with brew"
+        brew install coreutils
+    fi
+fi
+
 echo "$prefix Removing old stuff"
 rm -rf ~/.vim
 rm ~/.bashrc
