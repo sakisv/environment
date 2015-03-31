@@ -5,3 +5,4 @@ alias ll="ls -Flh"
 alias la="ls -Falh"
 
 alias grep="grep --color=auto"
+alias gg="git grep "
