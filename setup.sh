@@ -13,13 +13,13 @@ if [ `uname -s` == 'Darwin' ]; then
 fi
 
 echo "$prefix Removing old stuff..."
-rm -rf ~/.vim > /dev/null
-rm ~/.bashrc > /dev/null
-rm ~/.vimrc > /dev/null
-rm ~/.bash_aliases > /dev/null
-rm ~/.git-completion.bash > /dev/null
-rm ~/.git-prompt.sh > /dev/null
-rm ~/.screenrc > /dev/null
+rm -rf ~/.vim > /dev/null || echo "${prefix} .vim/ not found"
+rm ~/.bashrc > /dev/null || echo "${prefix} .bashrc not found"
+rm ~/.vimrc > /dev/null || echo "${prefix} .vimrc not found"
+rm ~/.bash_aliases > /dev/null || echo "${prefix} .bash_aliases not found"
+rm ~/.git-completion.bash > /dev/null || echo "${prefix} .git-completion.bash not found"
+rm ~/.git-prompt.sh > /dev/null || echo "${prefix} .git-prompt.sh not found"
+rm ~/.screenrc > /dev/null || echo "${prefix} .screenrc not found"
 
 echo "$prefix Creating ~/.vim/bundle & ~/.vim/colors"
 mkdir -p ~/.vim/bundle/ > /dev/null
