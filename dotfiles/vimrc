@@ -76,18 +76,23 @@ endif
 "
 " Indentation stuff
 "
-set expandtab
+
+" Set the default to be 4 for everything
 set shiftwidth=4
 set softtabstop=4
+set tabstop=4
+set expandtab
 set autoindent
 filetype plugin indent on
 
+" Except from yaml that we want 2
+autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
+
 " indent guides stuff
-set ts=4 sw=4 et
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 
-set ls=2
+set laststatus=2
 
 " toggle highlighting search results
 nnoremap <F3> :set hlsearch!<CR>
@@ -165,6 +170,7 @@ nmap :da<CR> ggVGd
 let g:syntastic_python_flake8_args='--ignore=E501,E128'
 let g:syntastic_html_checkers=[]
 
+" ctrlp config
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
