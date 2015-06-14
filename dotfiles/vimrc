@@ -32,6 +32,9 @@ set number
 " Disable highlighting spelling mistakes (http://stackoverflow.com/a/10963639/1477072)
 set nospell
 
+" Set use F5 to toggle spellcheck
+:map <F5> :setlocal spell! spelllang=en_us<CR>
+
 " Syntax highlight
 syntax on
 " More syntax highlighting.
