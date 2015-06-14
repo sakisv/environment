@@ -143,6 +143,8 @@ Plugin 'gmarik/Vundle.vim'
 " List plugins here
 "
 Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdtree'
