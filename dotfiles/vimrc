@@ -86,8 +86,12 @@ set expandtab
 set autoindent
 filetype plugin indent on
 
-" Except from yaml that we want 2
+" And then specify per filetype:
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype c setlocal ts=8 sts=8 sw=8
 
 " indent guides stuff
 let g:indent_guides_start_level = 2
