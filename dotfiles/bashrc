@@ -123,20 +123,13 @@ fi
 
 
 #
-# load bash_aliases
+# Load any other stuff
 #
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-#
-# pyenv stuff
-#
-
-export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if hash pyenv 2>/dev/null; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
+EXTRAS=(
+    "${HOME}/.bash_aliases"
+    "${HOME}/.pyenv"
+)
+for i in ${EXTRAS[@]}; do
+    if [[ -f ${i} ]]; then . ${i}; fi
+done
