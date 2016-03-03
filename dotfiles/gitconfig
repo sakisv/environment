@@ -1,0 +1,9 @@
+# This is Git's per-user configuration file.
+[core]
+[user]
+    name = sakis
+[push]
+    default = simple
+[alias]
+    st = status
+    co = checkout
