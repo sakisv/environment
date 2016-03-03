@@ -24,10 +24,18 @@ HISTCONTROL=$HISTCONTROL${HISTCONTROL+:}ignoredups
 # ... or force ignoredups and ignorespace
 HISTCONTROL=ignoreboth
 
+# Not everything deserves to be written in history
+export HISTIGNORE="exit:ls:ll:fg:history:cl:clear"
+
+# Store time in format: YYYY-MM-DD HH:MM:SS
+HISTTIMEFORMAT="%F %T "
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
 # Note: for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # when pressing tab, ignore .hidden files (http://askubuntu.com/a/190773)
 bind 'set match-hidden-files off'
