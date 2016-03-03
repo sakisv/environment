@@ -106,7 +106,7 @@ fi
 
 if [ "$COLOR_PROMPT" = yes ]; then
     prompt='\[$(tput bold)\]'
-    prompt+='\[$(tput setaf 0)\][\t] '  # [HH:MM:SS]
+    prompt+='\[$(tput setaf 0)\][\t] ' # [HH:MM:SS]
     prompt+='\[$(tput sgr0)\]'
     prompt+='\[$(tput bold)\]'
     prompt+='\[$(tput setaf 2)\]\u'    # user
@@ -118,7 +118,7 @@ if [ "$COLOR_PROMPT" = yes ]; then
         prompt+='\[$(tput setaf 3)\]$(__git_ps1)'
     fi
     prompt+='\[$(tput sgr0)\]'
-    prompt+='$ '
+    prompt+='\n$ '
     export PS1=$prompt
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
