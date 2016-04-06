@@ -33,8 +33,8 @@ set number
 " Disable highlighting spelling mistakes (http://stackoverflow.com/a/10963639/1477072)
 set nospell
 
-" Set use F5 to toggle spellcheck
-:map <F5> :setlocal spell! spelllang=en_us<CR>
+" Set use F6 to toggle spellcheck
+:map <F6> :setlocal spell! spelllang=en_us<CR>
 
 " Syntax highlight
 syntax on
@@ -90,7 +90,7 @@ filetype plugin indent on
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
-autocmd Filetype python setlocal ts=4 sts=4 sw=4
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 cc=80
 autocmd Filetype c setlocal ts=8 sts=8 sw=8
 
 " indent guides stuff
@@ -130,7 +130,16 @@ map <c-l> <c-w>l
 map j gj
 map k gk
 
-" 
+"
+" Folding
+"
+set foldmethod=indent
+set foldnestmax=2
+nnoremap <space> za
+" unfold everything when opening python files
+autocmd Syntax python normal zR
+
+"
 " stuff related to vundle
 "
 
@@ -147,15 +156,17 @@ Plugin 'gmarik/Vundle.vim'
 " 
 " List plugins here
 "
+Plugin 'airblade/vim-gitgutter'
+Plugin 'amirh/HTML-AutoCloseTag'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'sjl/gundo.vim'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'amirh/HTML-AutoCloseTag'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()
 filetype plugin indent on
@@ -186,3 +197,6 @@ let g:ctrlp_prompt_mappings = {
 " Ctrlp to honor .gitignore
 " https://github.com/kien/ctrlp.vim/issues/174#issuecomment-49747252
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Gundo config
+nnoremap <F5> :GundoToggle<CR>
