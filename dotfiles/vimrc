@@ -135,6 +135,8 @@ nnoremap <space> za
 " unfold everything when opening files
 autocmd Syntax * normal zR
 
+let mapleader=","
+
 "
 " stuff related to vundle
 "
@@ -155,6 +157,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'amirh/HTML-AutoCloseTag'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -192,7 +195,12 @@ let g:ctrlp_prompt_mappings = {
     \ }
 " Ctrlp to honor .gitignore
 " https://github.com/kien/ctrlp.vim/issues/174#issuecomment-49747252
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+nnoremap <Leader>p :CtrlPTag<cr>
 
 " Gundo config
 nnoremap <F5> :GundoToggle<CR>
+
+" Tagbar config
+nnoremap <F7> :TagbarToggle<CR>
