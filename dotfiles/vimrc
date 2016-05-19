@@ -23,6 +23,9 @@ set modifiable
 " Highlight the matching bracket
 set showmatch
 
+" Matching brackets will be brown (red+green) and underlined
+:hi MatchParen cterm=underline ctermbg=green ctermfg=red
+
 " Show the line numbers
 set number
 
@@ -49,9 +52,9 @@ set showcmd
 " Backspace over insert, line breaks and autoindent
 set backspace=indent,eol,start
 
-"
+""""""""""""""""""""""""""""""""""""""""""""""
 " Search stuff
-"
+""""""""""""""""""""""""""""""""""""""""""""""
 set incsearch
 set hlsearch
 set ignorecase
@@ -70,9 +73,9 @@ if has("user_commands")
     " command! -bang Qa qa<bang>
 endif
 
-"
+""""""""""""""""""""""""""""""""""""""""""""""
 " Indentation stuff
-"
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " Set the default to be 4 for everything
 set shiftwidth=4
@@ -126,9 +129,12 @@ map <c-l> <c-w>l
 map j gj
 map k gk
 
-"
+" Deletes contents of the file
+nmap :da<CR> ggVGd
+
+""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
-"
+""""""""""""""""""""""""""""""""""""""""""""""
 set foldmethod=indent
 set foldnestmax=2
 nnoremap <space> za
@@ -137,9 +143,16 @@ autocmd Syntax * normal zR
 
 let mapleader=","
 
-"
-" stuff related to vundle
-"
+" Set the colorscheme
+colorscheme molokai
+let g:Powerline_colorscheme='mar'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle stuff
+""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible
 filetype off
@@ -151,9 +164,9 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-"
-" List plugins here
-"
+""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins list
+""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'airblade/vim-gitgutter'
 Plugin 'amirh/HTML-AutoCloseTag'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -171,35 +184,42 @@ call vundle#end()
 filetype plugin indent on
 
 
-" Set the colorscheme
-colorscheme molokai
-let g:Powerline_colorscheme='mar'
+""""""""""""""""""""""""""""""""""""""""""""""
+" NERTree config
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " Toggle NERDTree
 :map <F4> :NERDTreeToggle<CR>
 
-" Deletes contents of the file
-nmap :da<CR> ggVGd
+" Ignore certain filetypes
+let NERDTreeIgnore = ['\.pyc$']
 
-:hi MatchParen cterm=underline ctermbg=none ctermfg=red
-
+""""""""""""""""""""""""""""""""""""""""""""""
 " Flake8 config
+""""""""""""""""""""""""""""""""""""""""""""""
+
 let g:syntastic_python_flake8_args='--ignore=E501,E128'
 let g:syntastic_html_checkers=[]
 
+""""""""""""""""""""""""""""""""""""""""""""""
 " ctrlp config
+""""""""""""""""""""""""""""""""""""""""""""""
+
 " Make enter (<cr>) open in new tab
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],
     \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
     \ }
-" Ctrlp to honor .gitignore
+
+" Honor .gitignore
 " https://github.com/kien/ctrlp.vim/issues/174#issuecomment-49747252
 " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 nnoremap <Leader>p :CtrlPTag<cr>
 
+""""""""""""""""""""""""""""""""""""""""""""""
 " Gundo config
+""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F5> :GundoToggle<CR>
 
 " Tagbar config
