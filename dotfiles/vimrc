@@ -98,6 +98,12 @@ let g:indent_guides_guide_size = 1
 
 set laststatus=2
 
+" start scrolling 15 lines before the edge
+set scrolloff=25
+
+" when we jump to the end of the page, center the cursor
+nnoremap G Gzz
+
 " toggle highlighting search results
 nnoremap <F3> :set hlsearch!<CR>
 
@@ -170,6 +176,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'amirh/HTML-AutoCloseTag'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'easymotion/vim-easymotion'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
