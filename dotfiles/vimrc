@@ -88,8 +88,9 @@ filetype plugin indent on
 " And then specify per filetype:
 autocmd Filetype yaml setlocal ts=2 sts=2 sw=2
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
-autocmd Filetype python setlocal ts=4 sts=4 sw=4 cc=80
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 cc=120,79
 autocmd Filetype c setlocal ts=8 sts=8 sw=8
 
 " indent guides stuff
@@ -141,11 +142,12 @@ nmap :da<CR> ggVGd
 """"""""""""""""""""""""""""""""""""""""""""""
 " Folding
 """"""""""""""""""""""""""""""""""""""""""""""
-set foldmethod=indent
-set foldnestmax=2
-nnoremap <space> za
+" set foldmethod=indent
+" set foldnestmax=2
+" nnoremap <space> za
+
 " unfold everything when opening files
-autocmd Syntax * normal zR
+" autocmd Syntax * normal zR
 
 let mapleader=","
 
@@ -168,7 +170,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Plugins list
@@ -205,12 +207,15 @@ let NERDTreeIgnore = ['\.pyc$']
 " Flake8 config
 """"""""""""""""""""""""""""""""""""""""""""""
 
-let g:syntastic_python_flake8_args='--ignore=E501,E128'
+let g:syntastic_python_flake8_args='--ignore=E501'
 let g:syntastic_html_checkers=[]
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " ctrlp config
 """"""""""""""""""""""""""""""""""""""""""""""
+
+" Open in mixed tab
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 " Make enter (<cr>) open in new tab
 let g:ctrlp_prompt_mappings = {
@@ -231,3 +236,6 @@ nnoremap <F5> :GundoToggle<CR>
 
 " Tagbar config
 nnoremap <F7> :TagbarToggle<CR>
+
+set exrc
+set secure
