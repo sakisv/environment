@@ -16,7 +16,7 @@ fi
 
 echo "${prefix} Removing old stuff..."
 rm -rf ~/.vim > /dev/null || echo "${prefix} .vim/ not found"
-declare -a files=("bashrc" "vimrc" "bash_aliases" "git-completion.bash" "git-prompt.sh" "screenrc" "gitconfig")
+declare -a files=("bashrc" "vimrc" "bash_aliases" "git-completion.bash" "git-prompt.sh" "screenrc" "gitconfig", "gitignore")
 
 for i in ${files[@]}; do
     if [[ -L ~/.${i} ]]; then
