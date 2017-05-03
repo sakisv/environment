@@ -92,6 +92,7 @@ autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 cc=120,79
 autocmd Filetype c setlocal ts=8 sts=8 sw=8
+autocmd Filetype go setlocal ts=4 sts=4 sw=4 noexpandtab nolist
 
 " indent guides stuff
 let g:indent_guides_start_level = 2
@@ -195,11 +196,20 @@ filetype plugin indent on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
+"
+" Plugin configuration
+"
+""""""""""""""""""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
 " NERTree config
 """"""""""""""""""""""""""""""""""""""""""""""
 
 " Toggle NERDTree
 :map <F4> :NERDTreeToggle<CR>
+" Open NERDTree  in current file
+:nmap <leader>n :NERDTreeFind<CR>
 
 " Ignore certain filetypes
 let NERDTreeIgnore = ['\.pyc$']
@@ -230,13 +240,28 @@ let g:ctrlp_prompt_mappings = {
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 nnoremap <Leader>p :CtrlPTag<cr>
 
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " Gundo config
 """"""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F5> :GundoToggle<CR>
 
+
+""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar config
+""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <F7> :TagbarToggle<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Ack config
+""""""""""""""""""""""""""""""""""""""""""""""
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
+
 
 set exrc
 set secure
