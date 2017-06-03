@@ -3,6 +3,10 @@ set pastetoggle=<F2>
 set encoding=utf-8
 set mouse=a
 
+" Make splitting less surprising
+set splitbelow
+set splitright
+
 " apply vimrc changes upon save
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
@@ -188,6 +192,7 @@ Plugin 'VundleVim/Vundle.vim'
 """"""""""""""""""""""""""""""""""""""""""""""
 Plugin 'airblade/vim-gitgutter'
 Plugin 'alvan/vim-closetag'
+Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'majutsushi/tagbar'
