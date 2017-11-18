@@ -16,7 +16,7 @@ fi
 
 echo "${prefix} Removing old stuff..."
 rm -rf ~/.vim > /dev/null || echo "${prefix} .vim/ not found"
-declare -a files=("bashrc" "vimrc" "bash_aliases" "git-completion.bash" "git-prompt.sh" "screenrc" "gitconfig", "gitignore")
+declare -a files=("bashrc" "vimrc" "bash_aliases" "git-completion.bash" "git-prompt.sh" "gitconfig" "gitignore" "tmux.conf")
 
 for i in ${files[@]}; do
     if [[ -L ~/.${i} ]]; then
@@ -39,6 +39,11 @@ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /d
 echo "${prefix} Downloading latest git-completion && git-prompt..."
 curl -Gk https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash > /dev/null
 curl -Gk https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh > /dev/null
+
+if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+    echo "${prefix} Cloning tmux-plugins..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
 
 echo "${prefix} Creating symlinks..."
 for i in ${files[@]}; do
