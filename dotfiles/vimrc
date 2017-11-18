@@ -58,9 +58,6 @@ set cursorline
 " Better command-line completion
 set wildmenu
 
-" Show partial commands in the last line of the screen
-set showcmd
-
 " Backspace over insert, line breaks and autoindent
 set backspace=indent,eol,start
 
@@ -139,12 +136,6 @@ nnoremap <F3> :set hlsearch!<CR>
 
 " instead of hitting Esc just press jj while on insert mode
 :inoremap jj <Esc>
-
-" bind ctrl+movement (h,j,k,l) to move between splits
-map <c-h> <c-w>h
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
 
 " Treat long lines as break lines (useful when moving around in them)
 " (https://amix.dk/vim/vimrc.html)
@@ -278,5 +269,7 @@ cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
 
+" Show partial commands in the last line of the screen
+set showcmd
 set exrc
 set secure
