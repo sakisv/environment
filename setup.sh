@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-COLOR_INFO='\033[1;30m'
+COLOR_DEBUG='\033[1;33m'
+COLOR_INFO='\033[1;34m'
 COLOR_SUCCESS='\033[1;32m'
 COLOR_ERROR='\033[1;31m'
 COLOR_RESET='\033[0m'
@@ -9,6 +10,9 @@ PREFIX="----->  "
 DOTFILES_DIR=$(pwd)/dotfiles
 
 
+_debug() {
+    printf "${COLOR_DEBUG}${PREFIX}[DEBUG] $1${COLOR_RESET}\n"
+}
 _info() {
     printf "${COLOR_INFO}${PREFIX}$1${COLOR_RESET}\n"
 }
@@ -40,6 +44,7 @@ handle_osx() {
 }
 
 install_essentials() {
+    _info "Installing basic apps..."
     sudo apt install -y \
         curl \
         direnv \
@@ -47,6 +52,7 @@ install_essentials() {
         silversearcher-ag
 
     sudo pip3 install black
+    _done
 }
 
 remove_old_files() {
@@ -127,7 +133,6 @@ create_symlinks() {
         [[ -d "${item}" ]] && continue
 
         filename=${HOME}/.$(basename ${item})
-        _error ${filename}
         if [[ -f ${filename} ]]; then
             _info "${filename} exists, skipping"
             continue
