@@ -148,7 +148,6 @@ fi
 
 EXTRAS=(
     "${HOME}/.bash_aliases"
-    "${HOME}/.pyenv"
     "${HOME}/.notes"
 )
 for i in ${EXTRAS[@]}; do
