@@ -43,7 +43,10 @@ install_essentials() {
     sudo apt install -y \
         curl \
         direnv \
+        python3-pip \
         silversearcher-ag
+
+    sudo pip3 install black
 }
 
 remove_old_files() {
