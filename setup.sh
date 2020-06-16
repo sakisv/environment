@@ -142,6 +142,10 @@ create_symlinks() {
     done
 }
 
+setup_gpg() {
+    gpg --keyserver keyserver.ubuntu.com --recv-keys FD3D7BD0882FE25C1B9B415BF393DA8310B040C1
+    echo "enable-ssh-support" > ${HOME}/.gnupg/gpg-agent.conf
+}
 
 [[ $(uname -s) == "Darwin" ]] && handle_osx
 install_essentials
@@ -151,6 +155,7 @@ configure_git
 configure_tmux
 configure_alacritty
 create_symlinks
+setup_gpg
 
 _success "Setup complete!"
 _success "Reload your shell for changes to take place..."
