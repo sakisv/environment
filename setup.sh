@@ -1,40 +1,81 @@
-#!/bin/bash
-set -e
-prefix="=====>"
-path=`pwd`
-dotfiles_dir="${path}/dotfiles"
+#!/usr/bin/env bash
 
-if [ `uname -s` == 'Darwin' ]; then
-    if hash brew 2>/dev/null; then
-        echo "${prefix} Installing coreutils with brew"
-        brew install coreutils > /dev/null
-    else
-        echo "brew is not installed. Exiting..."
+COLOR_INFO='\033[1;30m'
+COLOR_SUCCESS='\033[1;32m'
+COLOR_ERROR='\033[1;31m'
+COLOR_RESET='\033[0m'
+PREFIX="=====>"
+
+DOTFILES_DIR=$(pwd)/dotfiles
+
+_info() {
+    printf "${COLOR_INFO}${PREFIX}$1${COLOR_RESET}\n"
+}
+_success() {
+    printf "${COLOR_SUCCESS}${PREFIX}$1${COLOR_RESET}\n"
+}
+_error() {
+    printf "${COLOR_ERROR}${PREFIX}$1${COLOR_RESET}\n"
+}
+_done() {
+    _info "Done"
+}
+
+handle_osx() {
+    if [[ ! $(which brew) ]]; then
+        _error "brew is not installed. Exiting..."
         exit 1
     fi
-fi
+    _info "Installing coreutils with brew..."
+    brew install coreutils > /dev/null
+    _done
+}
 
-echo "${prefix} Removing old stuff..."
-rm -rf ~/.vim > /dev/null || echo "${prefix} .vim/ not found"
-declare -a files=("bashrc" "vimrc" "bash_aliases" "git-completion.bash" "git-prompt.sh" "gitconfig" "gitignore" "tmux.conf")
+remove_old_files() {
+    _info "Removing old stuff..."
 
-for i in ${files[@]}; do
-    if [[ -L ~/.${i} ]]; then
-        rm ~/.${i}
-    elif [[ -f ~/.${i} ]]; then
-        mv ~/.${i} ~/.${i}.bak
+    _info "Removing symlinks and creating backups of regular files"
+    for item in "${DOTFILES_DIR}"/*; do
+        # Skip over dirs
+        [[ -d "${item}" ]] && continue
+
+        filename=$(basename ${item})
+        # if a .dotfile symlink exists remove it
+        # if a non-symlink .dotfile exists back it up
+        if [[ -L ~/.${filename} ]]; then
+            _info "Removing symlink ${filename}"
+            rm ~/.${filename}
+        elif [[ -f ~/.${filename} ]]; then
+            _info "Creating backup for ${filename} at ~/${filename}.bak"
+            mv ~/.${filename} ~/.${filename}.bak
+        fi
+    done
+
+    _done
+}
+
+configure_neovim() {
+    NEOVIM_CONFIG_DIR="${HOME}/.config/nvim"
+    NEOVIM_PLUG_VERSION=0.10.0
+    NEOVIM_PLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/${NEOVIM_PLUG_VERSION}/plug.vim"
+
+    if [[ ! $(which nvim) ]]; then
+        _info "nvim not found, installing..."
+        sudo apt install neovim
+        _done
     fi
-done
 
-echo "${prefix} Creating ~/.vim/bundle & ~/.vim/colors..."
-mkdir -p ~/.vim/bundle/ > /dev/null
-mkdir -p ~/.vim/colors/ > /dev/null
+    _info "Downloading vim-plug ${NEOVIM_PLUG_VERSION}"
+    curl --create-dirs -sSLo "${$HOME/.local/share}"/nvim/site/autoload/plug.vim ${NEOVIM_PLUG_URL}
+    _done
 
-echo "${prefix} Downloading molokai..."
-curl -Gk https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim -o ~/.vim/colors/molokai.vim > /dev/null
+    _info "Downloading molokai..."
+    curl --create-dirs -sSLo ${NEOVIM_CONFIG_DIR}/colors/molokai.vim https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+}
 
-echo "${prefix} Downloading Vundle..."
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim > /dev/null
+[[ $(uname -s) == "Darwin" ]] && handle_osx
+remove_old_files
+configure_neovim
 
 echo "${prefix} Downloading latest git-completion && git-prompt..."
 curl -Gk https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash > /dev/null
@@ -48,7 +89,7 @@ fi
 echo "${prefix} Creating symlinks..."
 for i in ${files[@]}; do
     if [[ ! -f ~/.${i} ]]; then
-        ln -s ${dotfiles_dir}/${i} ~/.${i} > /dev/null
+        ln -s ${DOTFILES_DIR}/${i} ~/.${i} > /dev/null
     fi
 done
 
