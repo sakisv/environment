@@ -1,9 +1,16 @@
 #!/bin/bash
 alias cl="clear"
 
-alias ls="ls --color=auto"
-alias ll="ls -Flh"
-alias la="ls -Falh"
+alias ls="ls --color=auto --group-directories-first"
+alias ll="ls -Flh --group-directories-first"
+alias la="ls -Falh --group-directories-first"
 
 alias grep="grep --color=auto"
 alias gg="git grep "
+alias vi="nvim"
+alias vim="nvim"
+alias tf="terraform"
+
+alias reload="source ~/.bashrc"
+alias dm="docker-machine"
+alias pbcopy="xclip -selection clipboard"

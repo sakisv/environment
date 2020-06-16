@@ -38,7 +38,9 @@ HISTSIZE=10000
 HISTFILESIZE=20000
 
 # when pressing tab, ignore .hidden files (http://askubuntu.com/a/190773)
-bind 'set match-hidden-files off'
+if [[ $(which bind) ]]; then
+    bind 'set match-hidden-files off'
+fi
 
 
 #
@@ -124,6 +126,21 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
+agent_sock=$(gpgconf --list-dirs agent-socket)
+export GPG_AGENT_INFO=${agent_sock}:0:1
+if [ -n "$(gpgconf --list-options gpg-agent | awk -F: '/^enable-ssh-support:/{ print $10 }')" ]; then
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+fi
+export GPG_TTY=$(tty)
+
+if ! echo "$PATH" | grep -Eq "(^|:)/usr/local/go/bin($|:)"
+then
+    export PATH=$PATH:/usr/local/go/bin
+fi
+if ! echo "$PATH" | grep -Eq "(^|:)$HOME/go/bin($|:)"
+then
+    export PATH=$PATH:$HOME/go/bin
+fi
 
 #
 # Load any other stuff
@@ -132,9 +149,31 @@ fi
 EXTRAS=(
     "${HOME}/.bash_aliases"
     "${HOME}/.pyenv"
+    "${HOME}/.notes"
 )
 for i in ${EXTRAS[@]}; do
     if [[ -f ${i} ]]; then . ${i}; fi
 done
 
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
+eval "$(direnv hook bash)"
+# Install Ruby Gems to ~/gems
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+export PATH=$HOME/environment/bin:$PATH
+export PATH=$HOME/.tfenv/bin:$PATH
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f ~/projects/z/z.sh ] && source ~/projects/z/z.sh
+
+
+complete -C /usr/local/bin/nomad nomad
+_fly_compl() {
+    args=("${COMP_WORDS[@]:1:$COMP_CWORD}")
+    local IFS=$'\n'
+    COMPREPLY=($(GO_FLAGS_COMPLETION=1 ${COMP_WORDS[0]} "${args[@]}"))
+    return 0
+}
+complete -F _fly_compl fly
+source <(kubectl completion bash)
