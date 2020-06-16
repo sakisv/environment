@@ -12,5 +12,4 @@ alias vim="nvim"
 alias tf="terraform"
 
 alias reload="source ~/.bashrc"
-alias dm="docker-machine"
 alias pbcopy="xclip -selection clipboard"
