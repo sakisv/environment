@@ -49,6 +49,7 @@ install_essentials() {
         curl \
         direnv \
         python3-pip \
+        scdaemon \
         silversearcher-ag
 
     sudo pip3 install black
