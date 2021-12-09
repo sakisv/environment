@@ -123,7 +123,7 @@ configure_neovim() {
     ln -s ${NEOVIM_INIT} ${NEOVIM_CONFIG_DIR}/init.vim
 
     _info "Installing vim plugins..."
-    vim +PlugInstall +qall
+    nvim +PlugInstall +qall
 }
 
 configure_git() {
