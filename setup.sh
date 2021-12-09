@@ -64,6 +64,7 @@ install_essentials_osx() {
 
     _info "Installing ykman..."
     brew install ykman > /dev/null
+
     _done
 }
 
@@ -100,6 +101,12 @@ remove_old_files() {
         fi
     done
 
+    _done
+}
+
+install_z() {
+    _info "Downloading z..."
+    _download https://raw.githubusercontent.com/rupa/z/master/z.sh ${HOME}/z.sh
     _done
 }
 
@@ -173,6 +180,7 @@ setup_gpg() {
 
 [[ $(uname -s) != "Darwin" ]] && install_essentials
 [[ $(uname -s) == "Darwin" ]] && install_essentials_osx
+install_z
 remove_old_files
 configure_neovim
 configure_git

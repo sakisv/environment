@@ -164,7 +164,7 @@ export PATH=$HOME/.tfenv/bin:$PATH
 [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-[ -f ~/projects/z/z.sh ] && source ~/projects/z/z.sh
+[ -f ~/z.sh ] && source ~/z.sh
 
 
 complete -C /usr/local/bin/nomad nomad
