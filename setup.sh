@@ -164,7 +164,7 @@ create_symlinks() {
 }
 
 setup_gpg() {
-    gpg --keyserver keyserver.ubuntu.com --recv-keys FD3D7BD0882FE25C1B9B415BF393DA8310B040C1
+    gpg --keyserver $(dig +short keyserver.ubuntu.com | head -n 1) --recv-keys FD3D7BD0882FE25C1B9B415BF393DA8310B040C1
     echo "enable-ssh-support" > ${HOME}/.gnupg/gpg-agent.conf
 }
 
