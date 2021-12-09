@@ -38,8 +38,29 @@ install_essentials_osx() {
         _error "brew is not installed. Exiting..."
         exit 1
     fi
-    _info "Installing coreutils with brew..."
+    _info "Installing coreutils..."
     brew install coreutils > /dev/null
+
+    _info "Installing gnupg..."
+    brew install gnupg > /dev/null
+
+    _info "Installing curl..."
+    brew install curl > /dev/null
+
+    _info "Installing direnv..."
+    brew install direnv > /dev/null
+
+    _info "Installing ripgrep..."
+    brew install ripgrep > /dev/null
+
+    _info "Installing neovim..."
+    brew install neovim > /dev/null
+
+    _info "Installing pinentry-mac..."
+    brew install pinentry-mac > /dev/null
+
+    _info "Installing ykman..."
+    brew install ykman > /dev/null
     _done
 }
 
