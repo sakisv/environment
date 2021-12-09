@@ -65,6 +65,9 @@ install_essentials_osx() {
     _info "Installing ykman..."
     brew install ykman > /dev/null
 
+    _info "Installing aws-vault..."
+    brew install --cask aws-vault > /dev/null
+
     _done
 }
 
