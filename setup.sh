@@ -41,6 +41,9 @@ install_essentials_osx() {
     _info "Installing coreutils..."
     brew install coreutils > /dev/null
 
+    _info "Installing fzf..."
+    brew install fzf > /dev/null
+
     _info "Installing gnupg..."
     brew install gnupg > /dev/null
 
