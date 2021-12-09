@@ -33,7 +33,7 @@ _download() {
     curl --create-dirs -LsSo $to $from
 }
 
-handle_osx() {
+install_essentials_osx() {
     if [[ ! $(which brew) ]]; then
         _error "brew is not installed. Exiting..."
         exit 1
@@ -147,8 +147,8 @@ setup_gpg() {
     echo "enable-ssh-support" > ${HOME}/.gnupg/gpg-agent.conf
 }
 
-[[ $(uname -s) == "Darwin" ]] && handle_osx
-install_essentials
+[[ $(uname -s) != "Darwin" ]] && install_essentials
+[[ $(uname -s) == "Darwin" ]] && install_essentials_osx
 remove_old_files
 configure_neovim
 configure_git
