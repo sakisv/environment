@@ -1,5 +1,8 @@
 # .bashrc
 
+[[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+[[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 osname=`uname -s`
 if [ $osname == 'Darwin' ]; then
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -156,12 +159,7 @@ done
 
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
 eval "$(direnv hook bash)"
-# Install Ruby Gems to ~/gems
-export GEM_HOME=$HOME/gems
-export PATH=$HOME/gems/bin:$PATH
-export PATH=$HOME/environment/bin:$PATH
 export PATH=$HOME/.tfenv/bin:$PATH
-[[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/z.sh ] && source ~/z.sh
