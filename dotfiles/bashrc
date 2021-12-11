@@ -5,7 +5,7 @@
 
 osname=`uname -s`
 if [ $osname == 'Darwin' ]; then
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+    PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 fi
 
 # Source global definitions
