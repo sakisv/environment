@@ -172,6 +172,7 @@ create_symlinks() {
             _info "${filename} exists, skipping"
             continue
         fi
+        _info "Symlinking ${filename} to ${item}"
         ln -s ${item} ${filename}
     done
 }
