@@ -135,6 +135,7 @@ if [ -n "$(gpgconf --list-options gpg-agent | awk -F: '/^enable-ssh-support:/{ p
     export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 fi
 export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye
 
 if ! echo "$PATH" | grep -Eq "(^|:)/usr/local/go/bin($|:)"
 then
