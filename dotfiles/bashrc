@@ -7,7 +7,7 @@ osname=`uname -s`
 if [ $osname == 'Darwin' ]; then
     if [ $(uname -p) == 'i386' ]; then
         PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    elif [ $(uname -p) == 'arm' ]; then
+    elif [ $(uname -p) == 'arm64' ]; then
         PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
     fi
 fi
