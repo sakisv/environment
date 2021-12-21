@@ -15,3 +15,5 @@
     verbose = true
 [core]
     excludesfile = ~/.gitignore
+[init]
+    defaultBranch = main
