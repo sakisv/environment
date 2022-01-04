@@ -68,6 +68,9 @@ install_essentials_osx() {
     _info "Installing openssh..."
     brew install openssh > /dev/null
 
+    _info "Installing jq..."
+    brew install jq > /dev/null
+
     _info "Installing aws-vault..."
     brew install --cask aws-vault > /dev/null
 
