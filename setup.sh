@@ -9,7 +9,6 @@ PREFIX="----->  "
 
 DOTFILES_DIR=$(pwd)/dotfiles
 
-
 _debug() {
     printf "${COLOR_DEBUG}${PREFIX}[DEBUG] $1${COLOR_RESET}\n"
 }
@@ -34,45 +33,32 @@ _download() {
 }
 
 install_essentials_osx() {
+    osx_essentials=(
+        "coreutils"
+        "fzf"
+        "gnupg"
+        "curl"
+        "direnv"
+        "ripgrep"
+        "neovim"
+        "pinentry-mac"
+        "ykman"
+        "openssh"
+        "jq"
+        "tree"
+        "--cask aws-vault"
+    )
+
+
     if [[ ! $(which brew) ]]; then
         _error "brew is not installed. Exiting..."
         exit 1
     fi
-    _info "Installing coreutils..."
-    brew install coreutils > /dev/null
 
-    _info "Installing fzf..."
-    brew install fzf > /dev/null
-
-    _info "Installing gnupg..."
-    brew install gnupg > /dev/null
-
-    _info "Installing curl..."
-    brew install curl > /dev/null
-
-    _info "Installing direnv..."
-    brew install direnv > /dev/null
-
-    _info "Installing ripgrep..."
-    brew install ripgrep > /dev/null
-
-    _info "Installing neovim..."
-    brew install neovim > /dev/null
-
-    _info "Installing pinentry-mac..."
-    brew install pinentry-mac > /dev/null
-
-    _info "Installing ykman..."
-    brew install ykman > /dev/null
-
-    _info "Installing openssh..."
-    brew install openssh > /dev/null
-
-    _info "Installing jq..."
-    brew install jq > /dev/null
-
-    _info "Installing aws-vault..."
-    brew install --cask aws-vault > /dev/null
+    for item in "${osx_essentials[@]}"; do
+        _info "Installing ${item}"
+        brew install ${item} > /dev/null
+    done
 
     _done
 }
