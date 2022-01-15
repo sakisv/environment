@@ -181,7 +181,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'alvan/vim-closetag'
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'hashivim/vim-terraform'
+Plug 'hashivim/vim-terraform'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
@@ -196,10 +196,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'psf/black'
 
 " go stuff
-" Plug 'fatih/vim-go', {'tag': 'v1.21', 'do': ':GoUpdateBinaries'}
+Plug 'fatih/vim-go', {'tag': 'v1.25', 'do': ':GoUpdateBinaries'}
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/deoplete.nvim'
-Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -210,6 +209,9 @@ call plug#end()
 
 filetype plugin indent on
 
+" Enable deoplete on startup
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 """"""""""""""""""""""""""""""""""""""""""""""
 "
