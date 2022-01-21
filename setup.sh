@@ -46,6 +46,7 @@ install_essentials_osx() {
         "openssh"
         "jq"
         "tree"
+        "wget"
         "--cask aws-vault"
     )
 
