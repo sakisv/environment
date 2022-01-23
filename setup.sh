@@ -49,6 +49,7 @@ install_essentials_osx() {
         "wget"
         "--cask aws-vault"
         "tfenv"
+        "pwgen"
     )
 
 
