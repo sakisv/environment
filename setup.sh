@@ -50,6 +50,7 @@ install_essentials_osx() {
         "--cask aws-vault"
         "tfenv"
         "pwgen"
+        "tmux"
     )
 
 
