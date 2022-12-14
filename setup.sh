@@ -174,8 +174,15 @@ create_symlinks() {
 }
 
 setup_gpg() {
-    gpg --keyserver $(dig +short keyserver.ubuntu.com | head -n 1) --recv-keys FD3D7BD0882FE25C1B9B415BF393DA8310B040C1
+    local key_id="FD3D7BD0882FE25C1B9B415BF393DA8310B040C1"
+    gpg --keyserver $(dig +short keyserver.ubuntu.com | head -n 1) --recv-keys ${key_id}
     echo "enable-ssh-support" > ${HOME}/.gnupg/gpg-agent.conf
+    echo "pinentry-program /opt/homebrew/bin/pinentry-mac" >> ${HOME}/.gnupg/gpg-agent.conf
+
+    echo "standard-resolver" > ${HOME}/.gnupg/dirmngr.conf
+
+    _success "Updated gpg configuration \nTrust the key by running:\n\tgpg --edit-key ${key_id}\nand then pass 'trust -> 5 -> y -> quit'"
+
 }
 
 [[ $(uname -s) != "Darwin" ]] && install_essentials
