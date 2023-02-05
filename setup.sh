@@ -51,6 +51,7 @@ install_essentials_osx() {
         "tfenv"
         "pwgen"
         "tmux"
+        "pass"
     )
 
 
