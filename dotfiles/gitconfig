@@ -7,7 +7,8 @@
     default = simple
 [alias]
     st = status
-    co = "!f(){ if [ \"$1\" = '.' ]; then echo 'Nope'; else git checkout $@; fi; }; f"
+    co = checkout
+    pf = push --force-with-lease
     lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
     find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
 [commit]
