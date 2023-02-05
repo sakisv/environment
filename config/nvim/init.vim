@@ -193,7 +193,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
 
 " python stuff
-Plug 'psf/black'
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'fisadev/vim-isort'
 
 " go stuff
 Plug 'fatih/vim-go', {'tag': 'v1.25', 'do': ':GoUpdateBinaries'}
@@ -220,9 +221,13 @@ call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 """"""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" black config
+" python formatting
 """"""""""""""""""""""""""""""""""""""""""""""
-" autocmd BufWritePre *.py execute ':Black'
+aug pyformat
+    au!
+    autocmd BufWritePre *.py Isort
+    autocmd BufWritePre *.py Black
+aug END
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " nertree config
