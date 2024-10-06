@@ -11,6 +11,7 @@
     pf = push --force-with-lease
     lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
     find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+    diffs = diff --staged
 [commit]
     gpgsign = true
     verbose = true
@@ -20,3 +21,11 @@
     defaultBranch = main
 [pull]
     rebase = true
+[branch]
+    sort = committerdate
+[diff]
+    tool = difftastic
+[pager]
+    difftool = true
+[diff "gpg"]
+    textconv = gpg -q --no-tty --decrypt

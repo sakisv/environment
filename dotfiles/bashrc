@@ -5,11 +5,8 @@
 
 osname=`uname -s`
 if [ $osname == 'Darwin' ]; then
-    if [ $(uname -p) == 'i386' ]; then
-        PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    elif [ $(uname -p) == 'arm' ]; then
-        PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-    fi
+    export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
+    export PATH="$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH"
 fi
 
 # Source global definitions

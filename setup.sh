@@ -35,6 +35,7 @@ _download() {
 install_essentials_osx() {
     osx_essentials=(
         "coreutils"
+        "findutils"
         "fzf"
         "gnupg"
         "curl"
