@@ -13,3 +13,5 @@ alias tf="terraform"
 alias gr="cd $(git rev-parse --show-toplevel)"
 
 alias reload="source ~/.bashrc"
+
+alias git-remove-locals="git branch --v | grep \"\[gone\]\" | awk '{print $1}' | xargs git branch -D"
