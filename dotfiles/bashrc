@@ -2,6 +2,7 @@
 
 [[ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]] && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 [[ -f "/opt/homebrew/bin/brew" ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 osname=`uname -s`
 if [ $osname == 'Darwin' ]; then
@@ -112,7 +113,7 @@ fi
 
 if [ "$COLOR_PROMPT" = yes ]; then
     prompt='\[$(tput bold)\]'
-    prompt+='\[$(tput setaf 0)\][\t] ' # [HH:MM:SS]
+    prompt+='\[$(tput setaf 8)\][\t] ' # [HH:MM:SS]
     prompt+='\[$(tput sgr0)\]'
     prompt+='\[$(tput bold)\]'
     prompt+='\[$(tput setaf 2)\]\u'    # user
@@ -163,7 +164,8 @@ complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9
 eval "$(direnv hook bash)"
 export PATH=$HOME/.tfenv/bin:$PATH
 
-[ -f ~/.fzf/shell/key-bindings.bash ] && source ~/.fzf/shell/key-bindings.bash
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
 [ -f ~/z.sh ] && source ~/z.sh
 
 
@@ -176,7 +178,10 @@ _fly_compl() {
 }
 complete -F _fly_compl fly
 
-[[ $(which kubectl) ]] && source <(kubectl completion bash)
+unalias k
+source <(kubectl completion bash)
+alias k=kubectl
+complete -F __start_kubectl k
 
 if [[ $(which gds ) ]]; then
     : ${PROG:=gds}
@@ -201,3 +206,7 @@ if [[ $(which gds ) ]]; then
 
     unset PROG
 fi
+. "$HOME/.cargo/env"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# eval "$(starship init bash)"
