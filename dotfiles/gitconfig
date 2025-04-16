@@ -1,12 +1,67 @@
 # This is Git's per-user configuration file.
-[core]
 [user]
-    name = sakis
+    name = sakisv
+    email= me@sakisv.net
+    signingkey= FD3D7BD0882FE25C1B9B415BF393DA8310B040C1
 [push]
     default = simple
+    autoSetupRemote = true
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
 [alias]
     st = status
     co = checkout
+    pf = push --force-with-lease
     lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
+    find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+    diffs = diff --staged
+[blame]
+    ignoreRevsFile = .git-blame-ignore-revs
+[commit]
+    gpgsign = true
+    verbose = true
 [core]
     excludesfile = ~/.gitignore
+    pager = "diff-so-fancy | less --tabs=4 -RF"
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[interactive]
+    diffFilter = "diff-so-fancy --patch"
+[diff-so-fancy]
+    stripLeadingSymbols=false
+[init]
+    defaultBranch = main
+[pull]
+    rebase = true
+[branch]
+    sort = committerdate
+[diff "gpg"]
+    textconv = gpg -q --no-tty --decrypt
+[rebase]
+    autoSquash = true
+    updateRefs = true
+[help]
+    autocorrect = prompt
+
+[color]
+    ui = true
+
+[color.diff-highlight]
+    oldNormal = "red bold"
+    oldHighlight="red bold 52"
+    newNormal= "green bold"
+    newHighlight="green bold 22"
+
+[color.diff]
+    meta="11"
+    frag="magenta bold"
+    func="146 bold"
+    commit="yellow bold"
+    old="red bold"
+    new="green bold"
+    whitespace="red reverse"
