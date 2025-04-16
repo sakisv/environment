@@ -19,15 +19,34 @@
     verbose = true
 [core]
     excludesfile = ~/.gitignore
+    pager = "diff-so-fancy | less --tabs=4 -RF"
+[interactive]
+    diffFilter = "diff-so-fancy --patch"
+[diff-so-fancy]
+    stripLeadingSymbols=false
 [init]
     defaultBranch = main
 [pull]
     rebase = true
 [branch]
     sort = committerdate
-[diff]
-    tool = difftastic
-[pager]
-    difftool = true
 [diff "gpg"]
     textconv = gpg -q --no-tty --decrypt
+
+[color]
+    ui = true
+
+[color.diff-highlight]
+    oldNormal = "red bold"
+    oldHighlight="red bold 52"
+    newNormal= "green bold"
+    newHighlight="green bold 22"
+
+[color.diff]
+    meta="11"
+    frag="magenta bold"
+    func="146 bold"
+    commit="yellow bold"
+    old="red bold"
+    new="green bold"
+    whitespace="red reverse"
