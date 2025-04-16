@@ -12,6 +12,8 @@
     lgb = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
     find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
     diffs = diff --staged
+[blame]
+    ignoreRevsFile = .git-blame-ignore-revs
 [commit]
     gpgsign = true
     verbose = true
