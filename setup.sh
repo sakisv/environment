@@ -34,6 +34,7 @@ _download() {
 
 install_essentials_osx() {
     osx_essentials=(
+        "bash"
         "coreutils"
         "findutils"
         "fzf"
@@ -52,6 +53,7 @@ install_essentials_osx() {
         "tfenv"
         "pwgen"
         "tmux"
+        "ruff"
         "pass"
     )
 
