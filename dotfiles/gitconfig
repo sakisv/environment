@@ -45,6 +45,8 @@
 [rebase]
     autoSquash = true
     updateRefs = true
+[help]
+    autocorrect = prompt
 
 [color]
     ui = true
