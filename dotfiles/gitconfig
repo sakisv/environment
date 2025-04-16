@@ -42,6 +42,9 @@
     sort = committerdate
 [diff "gpg"]
     textconv = gpg -q --no-tty --decrypt
+[rebase]
+    autoSquash = true
+    updateRefs = true
 
 [color]
     ui = true
