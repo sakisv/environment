@@ -5,6 +5,7 @@
     signingkey= FD3D7BD0882FE25C1B9B415BF393DA8310B040C1
 [push]
     default = simple
+    autoSetupRemote = true
 [alias]
     st = status
     co = checkout
