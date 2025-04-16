@@ -157,7 +157,7 @@ let mapleader=","
 
 " Set the colorscheme
 colorscheme molokai
-let g:Powerline_colorscheme='mar'
+"let g:airline_theme="base16_monokai"
 
 " Set matching brackets' color
 " list of colors: https://vim.fandom.com/wiki/Xterm256_color_names_for_console_Vim
@@ -191,18 +191,23 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot'
+Plug 'neovim/nvim-lspconfig'
 
 " python stuff
-Plug 'psf/black', { 'branch': 'stable' }
+" Plug 'psf/black', { 'branch': 'stable' }
 Plug 'fisadev/vim-isort'
 
 " go stuff
 Plug 'fatih/vim-go', {'tag': 'v1.25', 'do': ':GoUpdateBinaries'}
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+"
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.4' }
 
 
 " Initialize plugin system
@@ -211,8 +216,8 @@ call plug#end()
 filetype plugin indent on
 
 " Enable deoplete on startup
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 
 """"""""""""""""""""""""""""""""""""""""""""""
 "
@@ -220,13 +225,183 @@ call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
 "
 """"""""""""""""""""""""""""""""""""""""""""""
 
+" telescope config
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " python formatting
 """"""""""""""""""""""""""""""""""""""""""""""
+" Auto-format Python files on save using Ruff and refresh buffer
+function! FormatCurrentBuffer()
+    let l:curbuf = bufnr('%')
+    let l:curfile = expand('%')
+    if l:curfile !=# ''
+      if executable('ruff')
+        silent! execute '!ruff check % --fix'
+        edit!
+      else
+        echo 'Ruff is not installed. Please run `pip install ruff` to install it.'
+      endif
+    endif
+    execute 'buffer' l:curbuf
+endfunction
+
+function! FormatCurrentBuffer2()
+    let l:curbuf = bufnr('%')
+    let l:curfile = expand('%')
+    if l:curfile !=# ''
+        if executable('ruff')
+            " Save the buffer to a temporary file
+            let l:tempfile = tempname()
+            silent! execute 'w ' . l:tempfile
+            " Run Ruff to format the file
+            silent! execute '!ruff check ' . l:tempfile . ' --fix'
+            " Reload the buffer from the temporary file if it has unsaved changes
+            if &modified
+                silent! execute 'e! ' . l:tempfile
+            else
+                " Otherwise, just reload the buffer from disk
+                edit!
+            endif
+            " Clean up the temporary file
+            call delete(l:tempfile)
+        else
+            echo 'Ruff is not installed. Please run `pip install ruff` to install it.'
+        endif
+    endif
+    execute 'buffer' l:curbuf
+  endfunction
+
+function! FormatCurrentBuffer3()
+    let l:curbuf = bufnr('%')
+    let l:curfile = expand('%')
+    if l:curfile !=# ''
+        if executable('ruff')
+            " Save the buffer to a temporary file
+            let l:tempfile = tempname()
+            silent! execute 'w ' . l:tempfile
+            " Run Ruff to format the file
+            silent! execute '!ruff check ' . l:tempfile . ' --fix'
+            " Read the formatted file into the buffer
+            let l:newbuf = readfile(l:tempfile)
+            call setline(1, l:newbuf)
+            " Clean up the temporary file
+            call delete(l:tempfile)
+        else
+            echo 'Ruff is not installed. Please run `pip install ruff` to install it.'
+        endif
+    endif
+    execute 'buffer' l:curbuf
+endfunction
+
+function! FormatCurrentBuffer4()
+    let l:curbuf = bufnr('%')
+    let l:curfile = expand('%')
+    if l:curfile !=# ''
+        if executable('ruff')
+            " Save the buffer to a temporary file
+            let l:tempfile = tempname()
+            silent! execute 'w ' . l:tempfile
+            " Run Ruff to format the file
+            silent! execute '!ruff check ' . l:tempfile . ' --fix'
+            " Read the formatted file into the buffer
+            let l:newbuf = readfile(l:tempfile)
+            " Remove the trailing newline character from each line in the newbuf list
+            call map(l:newbuf, 'substitute(v:val, "\n$", "", "")')
+            call setline(1, l:newbuf)
+            " Clean up the temporary file
+            call delete(l:tempfile)
+        else
+            echo 'Ruff is not installed. Please run `pip install ruff` to install it.'
+        endif
+    endif
+    execute 'buffer' l:curbuf
+endfunction
+
+function! FormatCurrentBuffer5()
+    let l:curbuf = bufnr('%')
+    let l:curfile = expand('%')
+    if l:curfile !=# ''
+        if executable('ruff')
+            " Save the buffer to a temporary file
+            let l:tempfile = tempname()
+            silent! execute 'w ' . l:tempfile
+            " Run Ruff to format the file
+            silent! execute '!ruff check ' . l:tempfile . ' --fix'
+            " Read the formatted file into a list
+            let l:newbuf = readfile(l:tempfile)
+            " Remove the trailing newline character from each line in the newbuf list
+            call map(l:newbuf, 'substitute(v:val, "\n$", "", "")')
+            " Clear the buffer
+            call deletebufline('%', 1, '$')
+            " Add the formatted contents to the buffer
+            call append(0, l:newbuf)
+            " Clean up the temporary file
+            call delete(l:tempfile)
+        else
+            echo 'Ruff is not installed. Please run `pip install ruff` to install it.'
+        endif
+    endif
+    execute 'buffer' l:curbuf
+endfunction
+
+function! FormatCurrentBuffer6()
+    let l:curbuf = bufnr('%')
+    let l:curfile = expand('%')
+    if l:curfile !=# ''
+        if executable('ruff')
+            " Save the buffer to a temporary file
+            let l:tempfile = tempname()
+            silent! execute 'w ' . l:tempfile
+            " Run Ruff to format the file
+            silent! execute '!ruff check ' . l:tempfile . ' --fix'
+            " Read the formatted file into a list
+            let l:newbuf = readfile(l:tempfile, 0)
+            " Clear the buffer
+            call deletebufline('%', 1, '$')
+            " Add the formatted contents to the buffer
+            call append(0, l:newbuf)
+            " Clean up the temporary file
+            call delete(l:tempfile)
+        else
+            echo 'Ruff is not installed. Please run `pip install ruff` to install it.'
+        endif
+    endif
+    execute 'buffer' l:curbuf
+endfunction
+
+function! FormatCurrentBuffer7()
+    let l:curbuf = bufnr('%')
+    let l:curfile = expand('%')
+    if l:curfile !=# ''
+        if executable('ruff')
+            " Save the buffer to a temporary file
+            let l:tempfile = tempname()
+            silent! execute 'w ' . l:tempfile
+            " Run Ruff to format the file
+            silent! execute '!ruff check ' . l:tempfile . ' --fix'
+            " Read the formatted file into a string
+            let l:newbuf = join(readfile(l:tempfile), "\n")
+            " Clear the buffer
+            call setline(1, [l:newbuf])
+            " Clean up the temporary file
+            call delete(l:tempfile)
+        else
+            echo 'Ruff is not installed. Please run `pip install ruff` to install it.'
+        endif
+    endif
+    execute 'buffer' l:curbuf
+endfunction
+
+
 aug pyformat
     au!
-    autocmd BufWritePre *.py Isort
-    autocmd BufWritePre *.py Black
+    " autocmd BufWritePre *.py Isort
+    " autocmd BufWritePre *.py Black
+    "autocmd BufWritePre *.py call FormatCurrentBuffer7()
+    "autocmd BufWritePost *.py edit <afile>
+    "autocmd BufWritePost *.py redraw!
 aug END
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -245,8 +420,8 @@ let NERDTreeIgnore = ['\.pyc$']
 " Flake8 config
 """"""""""""""""""""""""""""""""""""""""""""""
 
-let g:syntastic_python_flake8_args='--ignore=E501'
-let g:syntastic_html_checkers=[]
+"let g:syntastic_python_flake8_args='--ignore=E501'
+"let g:syntastic_html_checkers=[]
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
