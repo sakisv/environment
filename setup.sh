@@ -71,19 +71,6 @@ install_essentials_osx() {
     _done
 }
 
-install_essentials() {
-    _info "Installing basic apps..."
-    sudo apt install -y \
-        curl \
-        direnv \
-        python3-pip \
-        scdaemon \
-        silversearcher-ag
-
-    sudo pip3 install black
-    _done
-}
-
 remove_old_files() {
     _info "Removing old stuff..."
 
@@ -189,7 +176,6 @@ setup_gpg() {
 
 }
 
-[[ $(uname -s) != "Darwin" ]] && install_essentials
 [[ $(uname -s) == "Darwin" ]] && install_essentials_osx
 install_z
 remove_old_files
