@@ -35,6 +35,7 @@ _download() {
 install_essentials_osx() {
     osx_essentials=(
         "--cask aws-vault"
+        "basedpyright"
         "bash"
         "coreutils"
         "curl"
@@ -47,6 +48,7 @@ install_essentials_osx() {
         "openssh"
         "pass"
         "pinentry-mac"
+        "pre-commit"
         "pwgen"
         "ripgrep"
         "ruff"
