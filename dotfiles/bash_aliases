@@ -10,7 +10,6 @@ alias gg="git grep "
 alias vi="nvim"
 alias vim="nvim"
 alias tf="terraform"
-alias gr="cd $(git rev-parse --show-toplevel)"
 
 alias reload="source ~/.bashrc"
 

@@ -169,7 +169,6 @@ eval "$(fzf --bash)"
 [ -f ~/z.sh ] && source ~/z.sh
 
 
-complete -C /usr/local/bin/nomad nomad
 _fly_compl() {
     args=("${COMP_WORDS[@]:1:$COMP_CWORD}")
     local IFS=$'\n'
@@ -178,7 +177,7 @@ _fly_compl() {
 }
 complete -F _fly_compl fly
 
-unalias k
+[[ $(type -t k) == "alias" ]] && unalias k
 source <(kubectl completion bash)
 alias k=kubectl
 complete -F __start_kubectl k
