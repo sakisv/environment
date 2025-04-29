@@ -1,4 +1,4 @@
-local vimrc = vim.fn.stdpath("config") .. "/vimrc"
+local vimrc = vim.fn.stdpath("config") .. "/vim.vimrc"
 vim.cmd.source(vimrc)
 
 require('lspconfig').ruff.setup({
