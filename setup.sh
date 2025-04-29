@@ -7,7 +7,8 @@ COLOR_ERROR='\033[1;31m'
 COLOR_RESET='\033[0m'
 PREFIX="----->  "
 
-DOTFILES_DIR=$(pwd)/dotfiles
+CURRENT_DIR=$(pwd)
+DOTFILES_DIR=${CURRENT_DIR}/dotfiles
 
 _debug() {
     printf "${COLOR_DEBUG}${PREFIX}[DEBUG] $1${COLOR_RESET}\n"
@@ -96,6 +97,24 @@ remove_old_files() {
     _done
 }
 
+create_config_symlinks() {
+    _info "Creating config symlinks..."
+
+    # use the gnu version of cp, installed by coreutils
+    # Arguments:
+    #
+    # -r : recursive
+    # -s : symbolic link
+    # -v : verbose
+    # -i : interactive (ask if file exists)
+    # -b : backup
+    # -S .bak : set the backup suffix
+    #
+    gcp -rsvib -S .bak ${CURRENT_DIR}/config/* ${HOME}/.config/
+
+    _done
+}
+
 configure_neovim() {
     NEOVIM_CONFIG_DIR="${HOME}/.config/nvim"
     NEOVIM_PLUG_VERSION=0.10.0
@@ -153,6 +172,7 @@ setup_gpg() {
 
 install_essentials_osx
 remove_old_files
+create_config_symlinks
 configure_neovim
 configure_git
 configure_tmux
