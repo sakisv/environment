@@ -1,0 +1,8 @@
+theme = "Iterm2 Dark Background"
+bold-is-bright = true
+copy-on-select = clipboard
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+font-family = "Monaco"
+font-thicken = true
+clipboard-paste-protection = true
