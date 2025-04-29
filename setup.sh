@@ -122,7 +122,7 @@ configure_tmux() {
     fi
 }
 
-create_symlinks() {
+create_dotfile_symlinks() {
     _info "Creating symlinks..."
     for item in "${DOTFILES_DIR}"/*; do
         # Skip over dirs
@@ -150,13 +150,12 @@ setup_gpg() {
 
 }
 
-[[ $(uname -s) == "Darwin" ]] && install_essentials_osx
-install_z
+install_essentials_osx
 remove_old_files
 configure_neovim
 configure_git
 configure_tmux
-create_symlinks
+create_dotfile_symlinks
 setup_gpg
 
 _success "Setup complete!"
