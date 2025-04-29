@@ -36,6 +36,7 @@ install_essentials_osx() {
     osx_essentials=(
         "--cask aws-vault"
         "bash"
+        "bash_completion"
         "coreutils"
         "curl"
         "direnv"
