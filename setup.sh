@@ -35,7 +35,6 @@ _download() {
 install_essentials_osx() {
     osx_essentials=(
         "--cask aws-vault"
-        "basedpyright"
         "bash"
         "coreutils"
         "curl"
@@ -96,12 +95,6 @@ remove_old_files() {
     _done
 }
 
-install_z() {
-    _info "Downloading z..."
-    _download https://raw.githubusercontent.com/rupa/z/master/z.sh ${HOME}/z.sh
-    _done
-}
-
 configure_neovim() {
     NEOVIM_CONFIG_DIR="${HOME}/.config/nvim"
     NEOVIM_PLUG_VERSION=0.10.0
@@ -109,10 +102,6 @@ configure_neovim() {
 
     _info "Downloading vim-plug ${NEOVIM_PLUG_VERSION}"
     _download ${NEOVIM_PLUG_URL} ${HOME}/.local/share/nvim/site/autoload/plug.vim
-    _done
-
-    _info "Downloading molokai..."
-    _download https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim ${NEOVIM_CONFIG_DIR}/colors/molokai.vim
     _done
 
     _info "Installing vim plugins..."
