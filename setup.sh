@@ -106,13 +106,6 @@ configure_neovim() {
     NEOVIM_CONFIG_DIR="${HOME}/.config/nvim"
     NEOVIM_PLUG_VERSION=0.10.0
     NEOVIM_PLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/${NEOVIM_PLUG_VERSION}/plug.vim"
-    NEOVIM_INIT="$(pwd)/config/nvim/init.vim"
-
-    if [[ ! $(which nvim) ]]; then
-        _info "nvim not found, installing..."
-        sudo apt install neovim
-        _done
-    fi
 
     _info "Downloading vim-plug ${NEOVIM_PLUG_VERSION}"
     _download ${NEOVIM_PLUG_URL} ${HOME}/.local/share/nvim/site/autoload/plug.vim
@@ -121,8 +114,6 @@ configure_neovim() {
     _info "Downloading molokai..."
     _download https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim ${NEOVIM_CONFIG_DIR}/colors/molokai.vim
     _done
-
-    ln -s ${NEOVIM_INIT} ${NEOVIM_CONFIG_DIR}/init.vim
 
     _info "Installing vim plugins..."
     nvim +PlugInstall +qall
@@ -140,14 +131,6 @@ configure_tmux() {
         echo "${prefix} Cloning tmux-plugins..."
         git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
     fi
-}
-
-configure_alacritty() {
-    ALACRITTY_CONFIG_DIR="${HOME}/.config/alacritty"
-    ALACRITTY_CONFIG="$(pwd)/config/alacritty/alacritty.yml"
-
-    mkdir -p ${ALACRITTY_CONFIG_DIR}
-    ln -s ${ALACRITTY_CONFIG} ${ALACRITTY_CONFIG_DIR}
 }
 
 create_symlinks() {
@@ -184,7 +167,6 @@ remove_old_files
 configure_neovim
 configure_git
 configure_tmux
-configure_alacritty
 create_symlinks
 setup_gpg
 
