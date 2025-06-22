@@ -1,5 +1,4 @@
 set t_Co=256
-set pastetoggle=<F2>
 set encoding=utf-8
 set mouse=a
 
